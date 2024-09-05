@@ -160,7 +160,7 @@ function Navbar() {
                       <p className="text-richblack-25">{link.title}</p>
                       {loading ? (
                         <p className="text-center">Loading...</p>
-                      ) : subLinks.length ? (
+                      ) : subLinks?.length ? (
                         subLinks
                           ?.filter((subLink) => subLink?.courses?.length > 0)
                           ?.map((subLink, i) => (
