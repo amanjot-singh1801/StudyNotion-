@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { VscSignOut } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -15,8 +15,27 @@ export default function Sidebar() {
   const { loading: authLoading } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // to keep track of confirmation modal
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [confirmationModal, setConfirmationModal] = useState(null)
+
+  // Toggle sidebar visibility on button click
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevState) => !prevState) // Toggle state
+  }
+
+  // Close sidebar if clicking outside
+  useEffect(() => {
+    const closeSidebar = (e) => {
+      if (isSidebarOpen && !e.target.closest(".sidebar") && !e.target.closest(".menu-btn")) {
+        setIsSidebarOpen(false)
+      }
+    }
+    document.addEventListener("click", closeSidebar)
+    return () => {
+      document.removeEventListener("click", closeSidebar)
+    }
+  }, [isSidebarOpen])
 
   if (profileLoading || authLoading) {
     return (
@@ -28,8 +47,24 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="flex min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10">
-        <div className="flex flex-col">
+      {/* Toggle button for mobile view */}
+      <button
+        className="menu-btn absolute top-4 left-4 z-1 block lg:hidden text-white bg-richblack-800 p-2 rounded"
+        onClick={toggleSidebar} // Toggle the sidebar
+      >
+        Menu
+      </button>
+
+      {isSidebarOpen && (
+        <div className="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden" />
+      )}
+
+      <div
+        className={`fixed lg:static z-40 min-w-[220px] h-full flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10 transition-transform transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 lg:relative sidebar`}
+      >
+        <div className="flex flex-col sidebar">
           {sidebarLinks.map((link) => {
             if (link.type && user?.accountType !== link.type) return null
             return (
@@ -63,6 +98,8 @@ export default function Sidebar() {
           </button>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
       {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
     </>
   )
