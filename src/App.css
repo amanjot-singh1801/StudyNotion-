@@ -232,6 +232,12 @@ details > summary::-webkit-details-marker {
 } */
 /* Swiper CSS Ends */
 
+@media (max-width: 768px) {
+  Thead {
+    display: none !important;
+  }
+}
+
 .blackButton {
   @apply cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5;
 }

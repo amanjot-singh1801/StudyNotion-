@@ -44,7 +44,7 @@ export default function CoursesTable({ courses, setCourses }) {
       <Table className="rounded-xl border border-richblack-800 ">
         <Thead>
           <Tr className="flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2">
-            <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">
+            <Th className="text-left text-sm font-medium uppercase text-richblack-100">
               Courses
             </Th>
             <Th className="text-left text-sm font-medium uppercase text-richblack-100">
@@ -63,7 +63,6 @@ export default function CoursesTable({ courses, setCourses }) {
             <Tr>
               <Td className="py-10 text-center text-2xl font-medium text-richblack-100">
                 No courses found
-                {/* TODO: Need to change this state */}
               </Td>
             </Tr>
           ) : (
