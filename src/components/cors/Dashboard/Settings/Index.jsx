@@ -1,4 +1,4 @@
-import updateProfilePicture from "./UpdateProfilePicture"
+import UpdateProfilePicture from "./UpdateProfilePicture"
 import DeleteAccount from "./DeleteAccount"
 import EditProfile from "./EditProfile"
 import UpdatePassword from "./UpdatePassword"
@@ -10,7 +10,7 @@ export default function Settings() {
         Edit Profile
       </h1>
       {/* Change Profile Picture */}
-      <updateProfilePicture />
+      <UpdateProfilePicture />
       {/* Profile */}
       <EditProfile />
       {/* Password */}

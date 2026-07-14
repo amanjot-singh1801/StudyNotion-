@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom"
 // import CourseCard from "../components/Catalog/CourseCard"
 // import CourseSlider from "../components/Catalog/CourseSlider"
 import Footer from "../components/common/Footer"
-import Course_Card from "../components/cors/Catalog/Course_Card"
-import Course_Slider from "../components/cors/Catalog/Course_Slider"
+import CourseCard from "../components/cors/Catalog/CourseCard"
+import CourseSlider from "../components/cors/Catalog/CourseSlider"
 import { apiConnector } from "../services/apiconnector"
 import { categories } from "../services/apis"
 import { getCatalogPageData } from "../services/operations/pageAndComponntDatas"
@@ -23,7 +23,7 @@ function Catalog() {
     (async () => {
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        
+
         const category_id = res?.data?.data?.filter(
           (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
         )[0]._id
@@ -107,7 +107,7 @@ function Catalog() {
           </p>
         </div>
         <div>
-          <Course_Slider
+          <CourseSlider
             Courses={catalogPageData?.data?.selectedCategory?.courses}
           />
         </div>
@@ -118,7 +118,7 @@ function Catalog() {
           Top courses in {catalogPageData?.data?.differentCategory?.name}
         </div>
         <div className="py-8">
-          <Course_Slider
+          <CourseSlider
             Courses={catalogPageData?.data?.differentCategory?.courses}
           />
         </div>
@@ -132,7 +132,7 @@ function Catalog() {
             {catalogPageData?.data?.mostSellingCourses
               ?.slice(0, 4)
               .map((course, i) => (
-                <Course_Card course={course} key={i} Height={"h-[300px] md:h-[400px]" } />
+                <CourseCard course={course} key={i} Height={"h-[300px] md:h-[400px]" } />
               ))}
           </div>
         </div>
