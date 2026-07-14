@@ -157,9 +157,13 @@ function CourseDetails() {
                 <span>{`${studentsEnroled.length} students enrolled`}</span>
               </div>
               <div>
-                <p className="">
-                  Created By {`${instructor.firstName} ${instructor.lastName}`}
-                </p>
+                {instructor && (
+  <div>
+    <p className="">
+      Created By {`${instructor.firstName} ${instructor.lastName}`}
+    </p>
+  </div>
+)}
               </div>
               <div className="flex flex-wrap gap-5 text-lg">
                 <p className="flex items-center gap-2">
