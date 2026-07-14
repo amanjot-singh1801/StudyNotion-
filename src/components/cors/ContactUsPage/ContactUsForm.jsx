@@ -24,6 +24,7 @@ const ContactUsForm = () => {
         data
       )
       // console.log("Email Res - ", res)
+      
       setLoading(false)
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
